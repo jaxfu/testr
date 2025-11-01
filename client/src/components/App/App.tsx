@@ -1,58 +1,54 @@
 import styles from "./App.module.scss";
 import { Route, Routes } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS } from "../../utils/consts";
-import {
-  clearTokensFromLocalStorage,
-  getAuthStatus,
-} from "../../utils/methods";
 import ContentBox from "../ContentBox/ContentBox";
-import VersionLabel from "./children/VersionLabel/VersionLabel";
 import ProtectedApp from "./children/ProtectedApp/ProtectedApp";
-import { T_AUTH_STATUS } from "../../types";
 import Loading from "../Loading/Loading";
-import LoginRegister from "./children/LoginRegister/LoginRegister";
+import TopBar from "./children/TopBar/TopBar";
+import UnprotectedApp from "./children/UnprotectedApp/UnprotectedApp";
+import { useAuthCtx } from "../../contexts/AuthProvider";
+import useUserDataQuery from "../../queries/userDataQuery";
+import { USER_ROLES } from "../../utils/consts";
+import useTeacherDataQuery from "../../queries/teacherDataQuery";
 
 const App: React.FC = () => {
-  // fetch auth status if tokens in localstorage
-  const { isPending, isSuccess, data } = useQuery({
-    queryKey: [QUERY_KEYS.USER_DATA],
-    queryFn: getAuthStatus,
-    retry: false,
-    refetchOnWindowFocus: false,
-    staleTime: Infinity,
-  });
+	// get auth status
+	const authData = useAuthCtx();
 
-  const MainRoute = (
-    isSuccess: boolean,
-    isPending: boolean,
-    data: T_AUTH_STATUS | undefined,
-  ): JSX.Element => {
-    if (!isPending && isSuccess) {
-      if (data !== undefined && data.valid)
-        return <ProtectedApp userData={data.user_data} />;
-      else {
-        clearTokensFromLocalStorage();
-        return <LoginRegister />;
-      }
-    } else if (isPending) {
-      return <Loading />;
-    } else {
-      clearTokensFromLocalStorage();
-      return <LoginRegister />;
-    }
-  };
+	// get user info
+	const userDataQuery = useUserDataQuery(authData);
 
-  return (
-    <div className={styles.root}>
-      <VersionLabel />
-      <ContentBox>
-        <Routes>
-          <Route path="*" element={MainRoute(isSuccess, isPending, data)} />
-        </Routes>
-      </ContentBox>
-    </div>
-  );
+	// fetch teacher data if user role == teacher
+	const teacherDataQuery = useTeacherDataQuery(
+		authData.tokens.curr,
+		authData.valid &&
+			userDataQuery.isSuccess &&
+			userDataQuery.data.user_data.role === USER_ROLES.TEACHER,
+	);
+
+	return (
+		<div className={styles.root}>
+			<TopBar />
+
+			<ContentBox>
+				{userDataQuery.isFetching || teacherDataQuery.isFetching ? (
+					<Loading />
+				) : (
+					<Routes>
+						{authData.valid && userDataQuery.isSuccess ? (
+							<Route
+								path="*"
+								element={
+									<ProtectedApp userData={userDataQuery.data.user_data} />
+								}
+							/>
+						) : (
+							<Route path="*" element={<UnprotectedApp />} />
+						)}
+					</Routes>
+				)}
+			</ContentBox>
+		</div>
+	);
 };
 
 export default App;

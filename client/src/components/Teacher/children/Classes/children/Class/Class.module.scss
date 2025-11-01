@@ -1,0 +1,87 @@
+@use "../../../../../../styles/mixins";
+@use "../../../../../../styles/vars";
+
+.root {
+	@include mixins.full-size-percent;
+	display: flex;
+	flex-direction: column;
+	background: vars.$main-bg;
+
+	overflow: hidden;
+
+	.top {
+		width: 100%;
+		height: fit-content;
+
+		text-align: center;
+
+		background: vars.$main-bg;
+
+		.info {
+			font-size: 2rem;
+			background: vars.$main-bg;
+		}
+	}
+
+	.students {
+		width: 100%;
+		height: 100%;
+
+		overflow: auto;
+
+		.scroll {
+			width: 100%;
+			flex-direction: column;
+
+			#headers {
+				background: vars.$grid-header-bg;
+
+				border-top: vars.$grid-border;
+				border-bottom: vars.$grid-border;
+
+				position: sticky;
+				top: 0;
+			}
+
+			.empty {
+				width: 100%;
+				text-align: center;
+
+				background: vars.$grid-bg;
+			}
+
+			.row {
+				width: 100%;
+				@include mixins.flex-center-row;
+
+				display: grid;
+				grid-template-columns: 60% 40%;
+
+				background: vars.$grid-bg;
+
+				border-bottom: vars.$grid-border;
+				border-left: vars.$grid-border;
+				border-right: vars.$grid-border;
+
+				div {
+					width: 100%;
+					@include mixins.flex-center-row;
+
+					border-right: vars.$grid-border;
+
+					&:last-of-type {
+						border: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: vars.$mobile-width) {
+	.root .scroll .row:hover {
+		cursor: pointer;
+
+		background: lightgrey;
+	}
+}

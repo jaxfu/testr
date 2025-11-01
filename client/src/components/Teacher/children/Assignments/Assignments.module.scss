@@ -1,0 +1,44 @@
+@use "../../../../styles/mixins";
+@use "../../../../styles/vars";
+
+.root {
+	@include mixins.full-size-percent;
+	overflow: auto;
+
+	//border: 1px solid white;
+
+	.ass_cont {
+		@include mixins.full-size-percent;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		border: 1px solid white;
+
+		height: 40%;
+
+		.assignments {
+			margin-top: 20px;
+
+			border: 1px solid white;
+			width: 70%;
+			height: 100%;
+
+			overflow: auto;
+
+			.assignment {
+				@include mixins.flex-center;
+				flex-direction: row;
+				width: 100%;
+				height: 50px;
+
+				border: 1px solid white;
+
+				&:hover {
+					cursor: pointer;
+					background: vars.$color-btn-hover;
+				}
+			}
+		}
+	}
+}

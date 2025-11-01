@@ -5,7 +5,17 @@ import (
 	"log"
 	"os"
 
-	"mathtestr.com/server/internal/routing/routes"
+	"mathtestr.com/server/internal/routing/routes/assignments"
+	"mathtestr.com/server/internal/routing/routes/gamesessions"
+	"mathtestr.com/server/internal/routing/routes/login"
+	"mathtestr.com/server/internal/routing/routes/register"
+	"mathtestr.com/server/internal/routing/routes/students"
+	"mathtestr.com/server/internal/routing/routes/teachers"
+	teacher_assignments "mathtestr.com/server/internal/routing/routes/teachers/assignments"
+	"mathtestr.com/server/internal/routing/routes/teachers/classes"
+	"mathtestr.com/server/internal/routing/routes/users"
+	"mathtestr.com/server/internal/routing/routes/users/passwords"
+	"mathtestr.com/server/internal/routing/routes/users/vertical"
 
 	"mathtestr.com/server/internal/dbHandler"
 
@@ -21,7 +31,7 @@ import (
 func main() {
 	// ENV CONFIG
 	if os.Getenv("MODE") != "PROD" {
-		if err := godotenv.Load("../config/config.env"); err != nil {
+		if err := godotenv.Load(".env"); err != nil {
 			fmt.Printf("%+v\n", err)
 			os.Exit(1)
 		}
@@ -62,33 +72,33 @@ func main() {
 	middleware := middleware.NewMiddlewareHandler()
 	router.Use(middleware.ValidateAccessToken())
 
-	router.SetTrustedProxies([]string{"127.0.0.1"})
+	if err := router.SetTrustedProxies([]string{"127.0.0.1"}); err != nil {
+		fmt.Fprintf(os.Stderr, "error setting up trusted proxies: %+v\n", err)
+		os.Exit(1)
+	}
 
-	router.POST(consts.RouteUrlLogin, routes.Login(db))
-	router.POST(consts.RouteUrlValidateSession, routes.ValidateSession(db))
-	router.POST(consts.RouteUrlSubmitGameSession, routes.SubmitGameSession(db))
-	router.POST(consts.RouteUrlUpdateVertical, routes.UpdateVertical(db))
-	router.POST(consts.RouteUrlAddClasses, routes.AddClasses(db))
-	router.POST(consts.RouteUrlRegisterTeacher, routes.RegisterTeacher(db))
-	router.POST(consts.RouteUrlRegisterStudent, routes.RegisterStudent(db))
-	router.POST(consts.RouteUrlUpdateStudentClass, routes.UpdateStudentClass(db))
-	router.POST(consts.RouteUrlAddAssignment, routes.AddAssignment(db))
-	router.POST(consts.RouteUrlCheckPasswordResetCode, routes.CheckPasswordResetCode(db))
+	router.POST(consts.RouteUrlLogin, login.Login(db))
+	router.POST(consts.RouteUrlGameSessions, gamesessions.Add(db))
+	router.POST(consts.RouteUrlClasses, classes.Add(db))
+	router.POST(consts.RouteUrlRegisterTeacher, register.RegisterTeacher(db))
+	router.POST(consts.RouteUrlRegisterStudent, register.RegisterStudent(db))
+	router.POST(consts.RouteUrlAssignment, assignments.Add(db))
+	router.POST(consts.RouteUrlPasswordResetCodeCheck, passwords.CheckResetCode(db))
 
-	router.GET(consts.RouteUrlGetGameSessions, routes.GetGameSessions(db))
-	router.GET(consts.RouteUrlGetStudents, routes.GetStudents(db))
-	router.GET(consts.RouteUrlGetUserInfo, routes.GetUserInfo(db))
-	router.GET(consts.RouteUrlGetClasses, routes.GetClasses(db))
-	router.GET(consts.RouteUrlCheckUsername, routes.CheckUsername(db))
-	router.GET(consts.RouteUrlGetTeacherInfo, routes.GetTeacherInfo(db))
-	router.GET(consts.RouteUrlGetClass, routes.GetClass(db))
-	router.GET(consts.RouteUrlGetStudentInfo, routes.GetStudentInfo(db))
-	router.GET(consts.RouteUrlGetAssignmentsTeacher, routes.GetAssignmentsTeacher(db))
-	router.GET(consts.RouteUrlGetPasswordResetCode, routes.GetPasswordResetCode(db))
+	router.GET(consts.RouteUrlUser, users.Get(db))
+	router.GET(consts.RouteUrlGetTeacherData, teachers.Get(db))
+	router.GET(consts.RouteUrlGameSessions, gamesessions.Get(db))
+	router.GET(consts.RouteUrlCheckUsername, register.CheckUsername(db))
+	router.GET(consts.RouteUrlGetTeacherInfoForRegisterPage, register.GetTeacherInfoForRegisterPage(db))
+	router.GET(consts.RouteUrlGetAssignmentsTeacher, teacher_assignments.Get(db))
+	router.GET(consts.RouteUrlPasswordResetCode, passwords.Get(db))
+	router.GET(consts.RouteUrlStudent, students.Get(db))
 
-	router.PUT(consts.RouteUrlUpdatePassword, routes.UpdatePassword(db))
+	router.PUT(consts.RouteUrlPassword, passwords.Update(db))
+	router.PUT(consts.RouteUrlStudent, students.Update(db))
+	router.PUT(consts.RouteUrlVertical, vertical.Update(db))
 
-	router.DELETE(consts.RouteUrlDeleteStudent, routes.DeleteStudent(db))
+	router.DELETE(consts.RouteUrlStudent, students.Delete(db))
 
 	router.Use(spa.Middleware("/", "client"))
 

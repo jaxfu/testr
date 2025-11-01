@@ -1,0 +1,93 @@
+@use "../../../../styles/vars";
+@use "../../../../styles/mixins";
+
+$link-height: 2rem;
+$name-color: rgba(205, 243, 57, 0.9);
+$navbar-link-border: 1px solid black;
+$navbar-width: 135px;
+
+.root {
+	width: $navbar-width;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	background: vars.$navbar-bg;
+
+	border-right: $navbar-link-border;
+
+	.link {
+		width: 100%;
+		text-decoration: none;
+		color: white;
+
+		user-select: none;
+
+		div {
+			width: 100%;
+			height: $link-height;
+			@include mixins.flex-center-row;
+
+			border-bottom: $navbar-link-border;
+
+			padding-left: 10px;
+			padding-right: 10px;
+
+			&:hover {
+				background: #747575;
+			}
+
+			&.current {
+				background: blue;
+			}
+		}
+	}
+
+	.bottom {
+		.link div {
+			border-top: $navbar-link-border;
+
+			color: $name-color;
+
+			background: #424141;
+
+			&:hover {
+				background: #424141;
+			}
+		}
+
+		#username {
+			display: grid;
+			grid-template-columns: 75% 25%;
+			padding: 0;
+
+			cursor: default;
+
+			:first-child {
+				text-align: center;
+				padding-left: 5px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			:nth-child(2) {
+				@include mixins.flex-center-row;
+				color: white;
+				font-size: 1.5rem;
+
+				&:hover {
+					cursor: pointer;
+					color: grey;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: vars.$mobile-width) {
+	.root {
+		display: none;
+	}
+}

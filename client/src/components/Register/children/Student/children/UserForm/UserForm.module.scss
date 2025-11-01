@@ -1,40 +1,39 @@
-@import "../../../../../../styles/mixins";
-@import "../../../../../../styles/vars";
+@use "../../../../../../styles/mixins";
 
 .root {
-  @include full-size-percent;
-  @include flex-center;
-  gap: 5px;
+	@include mixins.full-size-percent;
+	@include mixins.flex-center;
+	gap: 5px;
 
-  padding: 20px;
+	padding: 20px;
 
-  //border: 1px solid white;
+	//border: 1px solid white;
 
-  .spacer {
-    min-height: 50px;
-    min-width: 100%;
-  }
+	.spacer {
+		min-height: 50px;
+		min-width: 100%;
+	}
 
-  input {
-    text-align: center;
-    font-size: 1.5rem;
-    width: 15rem;
-    height: 2rem;
-    border-radius: 10px;
-    border: 1px solid white;
-    background: rgb(71, 71, 71);
-    overflow-x: auto;
+	input {
+		text-align: center;
+		font-size: 1.5rem;
+		width: 15rem;
+		height: 2rem;
+		border-radius: 10px;
+		border: 1px solid white;
+		background: rgb(71, 71, 71);
+		overflow-x: auto;
 
-    &.err {
-      border: 2px solid red;
-    }
-  }
+		&.err {
+			border: 2px solid red;
+		}
+	}
 
-  div.err {
-    color: red;
-  }
+	div.err {
+		color: red;
+	}
 
-  button {
-    @include login-register-btn;
-  }
+	button {
+		@include mixins.login-register-btn;
+	}
 }

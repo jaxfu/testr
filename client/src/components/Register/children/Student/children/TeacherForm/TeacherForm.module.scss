@@ -1,68 +1,67 @@
-@import "../../../../../../styles/mixins";
-@import "../../../../../../styles/vars";
+@use "../../../../../../styles/mixins";
 
 .root {
-  @include full-size-percent;
+	@include mixins.full-size-percent;
 
-  padding-top: 50px;
+	padding-top: 50px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 
-  overflow-x: hidden;
-  overflow-y: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 
-  button {
-    @include login-register-btn;
-  }
+	button {
+		@include mixins.login-register-btn;
+	}
 
-  .form {
-    @include flex-center;
-    gap: 5px;
+	.form {
+		@include mixins.flex-center;
+		gap: 5px;
 
-    label {
-      font-size: 2rem;
-    }
+		label {
+			font-size: 2rem;
+		}
 
-    input {
-      max-width: 80%;
-      font-size: 2rem;
-      text-align: center;
-    }
-  }
+		input {
+			max-width: 80%;
+			font-size: 2rem;
+			text-align: center;
+		}
+	}
 
-  .teacher {
-    border: 1px solid white;
-    border-radius: 10px;
-    margin-top: 30px;
+	.teacher {
+		border: 1px solid white;
+		border-radius: 10px;
+		margin-top: 30px;
 
-    padding: 5px;
+		padding: 5px;
 
-    div {
-      font-size: 1.5rem;
-      text-align: center;
-    }
-  }
+		div {
+			font-size: 1.5rem;
+			text-align: center;
+		}
+	}
 
-  div.classes {
-    @include flex-center;
-    margin-top: 30px;
+	div.classes {
+		@include mixins.flex-center;
+		margin-top: 30px;
 
-    label {
-      font-size: 1.5rem;
-    }
+		label {
+			font-size: 1.5rem;
+		}
 
-    select {
-      font-size: 1.5rem;
-      cursor: pointer;
+		select {
+			font-size: 1.5rem;
+			cursor: pointer;
 
-      margin-bottom: 20px;
+			margin-bottom: 20px;
 
-      option {
-        font-size: 1.5rem;
-        text-align: center;
-      }
-    }
-  }
+			option {
+				font-size: 1.5rem;
+				text-align: center;
+			}
+		}
+	}
 }

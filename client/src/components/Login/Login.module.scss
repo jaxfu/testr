@@ -1,55 +1,190 @@
-@import "../../styles/mixins";
-@import "../../styles/vars";
+@use "../../styles/mixins";
+@use "../../styles/vars";
+
+$br: 20px;
 
 .root {
-  @include full-size-percent;
+	@include mixins.full-size-percent;
 
-  .content {
-    @include full-size-percent;
+	overflow: auto;
 
-    @include flex-center;
+	.scroll {
+		width: 100%;
+		min-height: 100%;
 
-    .link {
-      text-decoration: none;
-    }
+		@include mixins.flex-center-col;
 
-    .passwordBox {
-      @include flex-center;
+		padding: 20px;
 
-      position: relative;
-    }
+		.main {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
 
-    .eye {
-      position: absolute;
-      top: 55%;
-      right: 2%;
-      cursor: pointer;
-      color: white;
-    }
+			box-shadow: 4px 94px 211px 3px rgba(0, 0, 0, 0.77);
+			-webkit-box-shadow: 4px 94px 211px 3px rgba(0, 0, 0, 0.77);
+			-moz-box-shadow: 4px 94px 211px 3px rgba(0, 0, 0, 0.77);
 
-    input {
-      text-align: center;
-      font-size: 1.5rem;
-      width: 15rem;
-      height: 2rem;
-      border-radius: 10px;
-      border: 1px solid white;
-      background: rgb(71, 71, 71);
-      overflow-x: auto;
-    }
+			border-radius: $br;
 
-    button {
-      @include login-register-btn;
-    }
+			.logo {
+				background: vars.$logo-accent;
+				@include mixins.flex-center-row;
 
-    .forgot_password {
-      margin-top: 20px;
-      color: blue;
+				border-top-left-radius: $br;
+				border-bottom-left-radius: $br;
 
-      &:hover {
-        cursor: pointer;
-        color: lightblue;
-      }
-    }
-  }
+				img {
+					color: black;
+				}
+			}
+
+			form {
+				@include mixins.flex-center-col;
+
+				position: relative;
+
+				background: vars.$form-bg;
+				backdrop-filter: blur(2rem);
+				-webkit-backdrop-filter: blur(2rem);
+
+				border-top-right-radius: $br;
+				border-bottom-right-radius: $br;
+
+				color: black;
+
+				padding: 50px;
+				padding-bottom: 100px;
+				padding-top: 0;
+				gap: 10px;
+
+				.title {
+					height: 100%;
+
+					@include mixins.flex-center-col;
+
+					h2 {
+						font-size: 4rem;
+					}
+
+					.img {
+						aspect-ratio: 1/1;
+						width: 50px;
+
+						border: 1px solid black;
+					}
+				}
+
+				.input {
+					width: 100%;
+					@include mixins.flex-center-row;
+
+					border: 1px solid white;
+					border-radius: $br;
+					background: rgba($color: #fff, $alpha: 1);
+
+					position: relative;
+
+					div {
+						aspect-ratio: 1/1;
+						height: 100%;
+						@include mixins.flex-center-row;
+
+						padding: 5px;
+						background: rgba($color: #000, $alpha: 0.1);
+						border-top-left-radius: $br;
+						border-bottom-left-radius: $br;
+
+						position: absolute;
+						left: 0;
+					}
+
+					input {
+						width: 100%;
+						height: 2rem;
+
+						text-align: center;
+						font-size: 1.5rem;
+
+						border-radius: 20px;
+						border: none;
+						background: rgba($color: #fff, $alpha: 1);
+
+						overflow-x: auto;
+						color: black;
+
+						&:focus {
+							outline: none;
+						}
+					}
+				}
+
+				button {
+					width: 100%;
+					height: 50px;
+
+					position: absolute;
+					bottom: 0;
+
+					font-size: 1rem;
+
+					border-radius: 0;
+					border: none;
+					border-bottom-right-radius: calc($br - 1px);
+
+					background: rgba($color: #2b1bbe, $alpha: 0.9);
+
+					&:hover {
+						background: rgba($color: #2b1bbe, $alpha: 0.7);
+					}
+				}
+			}
+
+			.forgot_password {
+				color: blue;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 700px) {
+	.root .scroll .main .forgot_password:hover {
+		color: grey;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.root .scroll .main {
+		width: 90%;
+		@include mixins.flex-center-col;
+
+		background: vars.$main-bg;
+
+		form {
+			width: 100%;
+			border-top-left-radius: $br;
+			border-bottom-left-radius: $br;
+			padding-left: 10px;
+			padding-right: 10px;
+
+			.title h2 {
+				font-size: 2rem;
+			}
+
+			.input {
+				width: 100%;
+
+				input {
+					width: 100%;
+				}
+			}
+
+			button {
+				border-bottom-left-radius: calc($br - 1px);
+			}
+		}
+
+		.logo {
+			display: none;
+		}
+	}
 }

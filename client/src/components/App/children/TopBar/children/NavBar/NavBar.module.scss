@@ -1,0 +1,50 @@
+@use "../../../../../../styles/vars";
+@use "../../../../../../styles/mixins";
+
+$link-height: 2rem;
+$name-color: rgb(162, 225, 37);
+$navbar-link-border: 1px solid white;
+$current-bg: #00f;
+
+.root {
+	max-height: 20dvh;
+	width: 100%;
+
+	background: vars.$navbar-bg;
+
+	overflow: auto;
+
+	position: absolute;
+
+	z-index: 20;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	.link {
+		text-decoration: none;
+		color: white;
+
+		h3 {
+			height: $link-height;
+			@include mixins.flex-center-row;
+
+			border-bottom: $navbar-link-border;
+
+			&.current {
+				background: $current-bg;
+			}
+		}
+
+		&.name {
+			color: $name-color;
+		}
+	}
+}
+
+@media only screen and (min-width: vars.$mobile-width) {
+	.root {
+		display: none;
+	}
+}

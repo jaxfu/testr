@@ -1,0 +1,20 @@
+@use "../../../../../../../../styles/vars";
+@use "../../../../../../../../styles/mixins";
+
+.root {
+	@include mixins.flex-center-col;
+	border-right: vars.$grid-border;
+
+	.edit {
+		@include mixins.flex-center-col;
+		padding: 5px;
+
+		label {
+			font-size: 0.9rem;
+		}
+
+		input {
+			text-align: center;
+		}
+	}
+}

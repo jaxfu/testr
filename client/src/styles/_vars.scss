@@ -13,10 +13,103 @@ $color-navbar-username: blue;
 $color-guess-text-input: #312f2f;
 $color-cell-header: rgba(255, 255, 255, 0.1);
 
-$main_bg: rgb(49, 47, 47);
+$main-bg: linear-gradient(225deg, #151515, #292727);
+$topbar-bg: #111010;
+$navbar-bg: #312f2f;
+$form-bg: rgba(
+	$color: #fff,
+	$alpha: 0.9,
+);
+$grid-bg: grey;
+$grid-header-bg: darkgrey;
+$grid-border: 1px solid white;
+
+$logo-accent: #0bbc6c;
+$font-color-main: #fff;
 
 $border: 1px solid black;
-
 $border-radius: 15px;
 
-$height-navbar: 50px;
+$topbar-height: 50px;
+
+$mobile-width: 800px;
+
+/* SCSS HEX */
+$columbia-blue: #cae5ffff;
+$non-photo-blue: #acedffff;
+$jordy-blue: #89bbfeff;
+$glaucous: #6f8ab7ff;
+$davys-gray: #615d6cff;
+
+/* SCSS Gradient */
+$gradient-top: linear-gradient(
+	0deg,
+	#cae5ffff,
+	#acedffff,
+	#89bbfeff,
+	#6f8ab7ff,
+	#615d6cff
+);
+$gradient-right: linear-gradient(
+	90deg,
+	#cae5ffff,
+	#acedffff,
+	#89bbfeff,
+	#6f8ab7ff,
+	#615d6cff
+);
+$gradient-bottom: linear-gradient(
+	180deg,
+	#cae5ffff,
+	#acedffff,
+	#89bbfeff,
+	#6f8ab7ff,
+	#615d6cff
+);
+$gradient-left: linear-gradient(
+	270deg,
+	#cae5ffff,
+	#acedffff,
+	#89bbfeff,
+	#6f8ab7ff,
+	#615d6cff
+);
+$gradient-top-right: linear-gradient(
+	45deg,
+	#cae5ffff,
+	#acedffff,
+	#89bbfeff,
+	#6f8ab7ff,
+	#615d6cff
+);
+$gradient-bottom-right: linear-gradient(
+	135deg,
+	#cae5ffff,
+	#acedffff,
+	#89bbfeff,
+	#6f8ab7ff,
+	#615d6cff
+);
+$gradient-top-left: linear-gradient(
+	225deg,
+	#cae5ffff,
+	#acedffff,
+	#89bbfeff,
+	#6f8ab7ff,
+	#615d6cff
+);
+$gradient-bottom-left: linear-gradient(
+	315deg,
+	#cae5ffff,
+	#acedffff,
+	#89bbfeff,
+	#6f8ab7ff,
+	#615d6cff
+);
+$gradient-radial: radial-gradient(
+	#cae5ffff,
+	#acedffff,
+	#89bbfeff,
+	#6f8ab7ff,
+	#615d6cff
+);

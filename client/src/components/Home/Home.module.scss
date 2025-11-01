@@ -1,28 +1,31 @@
-@import "../../styles/mixins";
+@use "../../styles/mixins";
 
 .root {
-  @include full-size-percent;
-  gap: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  //border: 1px solid red;
+	@include mixins.full-size-percent;
+	overflow: auto;
 
-  .info {
-    h2 {
-      font-size: 2rem;
-    }
-  }
+	.scroll {
+		max-height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
 
-  .past_tests {
-    width: 80%;
-    height: fit-content;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 5px;
-    padding-bottom: 100px;
+		.info {
+			width: 100%;
+			@include mixins.flex-center-row;
 
-    //border: 1px solid white;
-  }
+			//background: #6f6f6f;
+
+			div {
+				width: 50%;
+
+				text-align: center;
+				font-size: 2rem;
+
+				&:nth-of-type(1) {
+					border-right: 1px solid grey;
+				}
+			}
+		}
+	}
 }

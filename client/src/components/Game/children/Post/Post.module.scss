@@ -1,107 +1,106 @@
-@import "../../../../styles/mixins";
-@import "../../../../styles/vars";
+@use "../../../../styles/mixins";
+@use "../../../../styles/vars";
 
 .root {
-  min-width: 287px;
-  @include full-size-percent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	@include mixins.full-size-percent;
 
-  gap: 10%;
+	overflow: auto;
 
-  //border: 1px solid white;
+	.scroll {
+		min-height: 100%;
+		width: 100%;
 
-  padding-top: 20px;
+		@include mixins.flex-center-col;
+		gap: 10%;
 
-  h2 {
-    font-size: 5rem;
-    font-weight: bold;
-    text-align: center;
-  }
+		//border: 1px solid white;
 
-  h3 {
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-  }
+		padding: 20px;
 
-  .info {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+		h2 {
+			font-size: 5rem;
+			font-weight: bold;
+			text-align: center;
+		}
 
-    .ratio {
-      margin-top: 50px;
-    }
-  }
+		h3 {
+			font-size: 3rem;
+			font-weight: bold;
+			text-align: center;
+		}
 
-  .results {
-    width: 80%;
-    height: fit-content;
+		.info {
+			width: 60%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
 
-    //border: 1px solid white;
-    border-radius: 10px;
-    padding: 5px;
+		.results {
+			width: 80%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 5px;
+			//border: 1px solid white;
+			border-radius: 10px;
+			padding: 5px;
 
-    .incorrect {
-      width: fit-content;
-      height: fit-content;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 5px;
 
-      display: flex;
-      flex-direction: column;
+			.incorrect {
+				width: fit-content;
+				height: fit-content;
 
-      border: 1px solid white;
-      border-radius: 10px;
+				display: flex;
+				flex-direction: column;
 
-      div {
-        text-align: center;
-        font-size: 1.5rem;
+				border: 1px solid white;
+				border-radius: 10px;
 
-        border-bottom: 1px solid white;
-        padding: 5px;
+				div {
+					text-align: center;
+					font-size: 1.5rem;
 
-        &:nth-child(3) {
-          border: none;
-          color: red;
-        }
-      }
-    }
-  }
+					border-bottom: 1px solid white;
+					padding: 5px;
 
-  .buttons {
-    padding-bottom: 100px;
-    display: flex;
-    gap: 20px;
+					&:nth-child(3) {
+						border: none;
+						color: red;
+					}
+				}
+			}
+		}
 
-    .box {
-      @include flex-center;
+		.buttons {
+			display: flex;
+			gap: 20px;
+			margin-top: 20px;
 
-      .button {
-        width: 75px;
-        height: 75px;
-        @include flex-center;
-        border: 1px solid white;
-        border-radius: 15px;
-        background: green;
+			.box {
+				@include mixins.flex-center;
 
-        .icon {
-          font-size: 3rem;
-        }
+				.button {
+					width: 75px;
+					height: 75px;
+					@include mixins.flex-center;
+					border: 1px solid white;
+					border-radius: 15px;
+					background: green;
 
-        &:hover {
-          cursor: pointer;
-          background: rgb(114, 162, 114);
-        }
-      }
-    }
-  }
+					.icon {
+						font-size: 3rem;
+					}
+
+					&:hover {
+						cursor: pointer;
+						background: rgb(114, 162, 114);
+					}
+				}
+			}
+		}
+	}
 }

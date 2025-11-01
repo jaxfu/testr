@@ -22,6 +22,11 @@ func InitDBHandler(connectionString string) (*DBHandler, error) {
 		return &newDBHandler, err
 	}
 	newDBHandler.Conn = db
+
+	if err := db.Ping(context.Background()); err != nil {
+		return &newDBHandler, err
+	}
+
 	return &newDBHandler, nil
 }
 

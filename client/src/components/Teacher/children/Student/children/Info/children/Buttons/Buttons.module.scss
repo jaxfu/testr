@@ -1,0 +1,85 @@
+@use "../../../../../../../../styles/vars";
+@use "../../../../../../../../styles/mixins";
+
+.root {
+	@include mixins.flex-center-row;
+	justify-content: space-around;
+
+	span {
+		cursor: pointer;
+
+		position: relative;
+
+		.icon {
+			font-size: 1.5rem;
+		}
+
+		#delete {
+			font-size: 1.6rem;
+			color: red;
+		}
+
+		#edit {
+			color: yellowgreen;
+		}
+
+		#reset {
+			color: blue;
+			font-size: 1.8rem;
+
+			transform: translateY(2px);
+		}
+
+		#cancel {
+			font-size: 2rem;
+			color: red;
+		}
+
+		#confirm {
+			font-size: 2rem;
+			color: green;
+		}
+
+		.context {
+			display: none;
+
+			user-select: none;
+		}
+	}
+}
+
+@media only screen and (min-width: vars.$mobile-width) {
+	.root span:hover {
+		.context {
+			background: vars.$main-bg;
+			position: absolute;
+			z-index: 30;
+			display: block;
+
+			transform: translateX(-25%);
+
+			border-radius: 10px;
+			padding: 5px;
+		}
+
+		#delete {
+			color: grey;
+		}
+
+		#edit {
+			color: grey;
+		}
+
+		#reset {
+			color: grey;
+		}
+
+		#cancel {
+			color: grey;
+		}
+
+		#confirm {
+			color: grey;
+		}
+	}
+}

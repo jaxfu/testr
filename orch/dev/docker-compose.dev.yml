@@ -1,0 +1,32 @@
+name: mathly
+
+services:
+  db:
+    image: postgres:18
+    container_name: mathly_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../../config/sql/create_tables.sql:/docker-entrypoint-initdb.d/init.sql
+      - mathly_pgdata:/var/lib/postgresql
+
+  server:
+    image: mathly/server:latest
+    container_name: mathly_server
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    environment:
+      MODE: ${MODE}
+      PORT: ${PORT}
+      DB_URL: ${DB_URL}
+
+volumes:
+  mathly_pgdata:

@@ -1,250 +1,198 @@
-@import "../../../../styles/mixins";
-@import "../../../../styles/vars";
+@use "../../../../styles/mixins";
+@use "../../../../styles/vars";
 
 .root {
-  @include full-size-percent;
-  min-width: 287px;
+	@include mixins.full-size-percent;
+	@include mixins.flex-center;
 
-  @include flex-center;
+	overflow: auto;
 
-  gap: 10%;
+	.scroll {
+		min-height: 100%;
+		width: 100%;
 
-  //border: 1px solid white;
+		@include mixins.flex-center-col;
 
-  .container {
-    min-width: 60%;
-    max-width: 70%;
-    height: 75%;
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+			.info {
+				width: 100%;
+				height: fit-content;
 
-    //border: 1px solid white;
+				display: flex;
+				justify-content: space-between;
+				gap: 10px;
 
-    overflow: auto;
+				.number {
+					@include mixins.flex-center;
+					min-width: 8rem;
+					width: fit-content;
+					height: 100%;
+					padding: 10px;
+					font-size: 5rem;
+					font-weight: bold;
 
-    .info {
-      width: 100%;
-      height: fit-content;
+					border: 3px solid white;
+					border-radius: 10px;
+				}
 
-      justify-content: space-between;
+				.timer {
+					@include mixins.flex-center;
+					width: fit-content;
+					height: 100%;
+					padding: 10px;
+					font-size: 5rem;
+					font-weight: bold;
 
-      //border: 1px solid white;
+					border: 3px solid white;
+					border-radius: 10px;
+				}
+			}
 
-      display: flex;
-      gap: 10px;
+			.content {
+				width: 100%;
+				height: fit-content;
 
-      .number {
-        @include flex-center;
-        min-width: 8rem;
-        width: fit-content;
-        height: 100%;
-        padding: 10px;
-        font-size: 5rem;
-        font-weight: bold;
+				border: 3px solid white;
+				border-radius: 10px;
+				padding: 5px;
 
-        border: 3px solid white;
-        border-radius: 10px;
-      }
+				display: grid;
+				grid-template-rows: 3fr 2fr;
 
-      .timer {
-        @include flex-center;
-        width: fit-content;
-        height: 100%;
-        padding: 10px;
-        font-size: 5rem;
-        font-weight: bold;
+				h2 {
+					font-size: 5rem;
+					font-weight: bold;
+					text-align: center;
+				}
 
-        border: 3px solid white;
-        border-radius: 10px;
-      }
-    }
+				input[type="number"] {
+					width: 10rem;
+					height: 4rem;
 
-    .content {
-      width: 100%;
-      height: fit-content;
+					text-align: center;
+					font-size: 3rem;
+					font-weight: bold;
+				}
 
-      border: 3px solid white;
-      border-radius: 10px;
-      padding: 5px;
+				.top {
+					width: 100%;
+					height: 100%;
 
-      display: grid;
-      grid-template-rows: 3fr 2fr;
+					display: grid;
+					grid-template-columns: repeat(3, 1fr);
 
-      h2 {
-        font-size: 5rem;
-        font-weight: bold;
-        text-align: center;
-      }
+					div {
+						@include mixins.flex-center;
+					}
 
-      input[type="number"] {
-        width: 10rem;
-        height: 4rem;
+					.left {
+						align-items: flex-end;
+					}
 
-        text-align: center;
-        font-size: 3rem;
-        font-weight: bold;
-      }
+					.right {
+						align-items: flex-start;
+					}
+				}
 
-      .top {
-        width: 100%;
-        height: 100%;
+				.bottom {
+					width: 100%;
+					height: 100%;
 
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+					@include mixins.flex-center;
 
-        div {
-          @include flex-center;
-        }
+					//border: 1px solid white;
 
-        .left {
-          align-items: flex-end;
-        }
+					position: relative;
 
-        .right {
-          align-items: flex-start;
-        }
-      }
+					.err {
+						border: red;
+						background: red;
+					}
+				}
+			}
+		}
+	}
 
-      .bottom {
-        width: 100%;
-        height: 100%;
+	&.vertical .scroll {
+		.container {
+			min-width: 80%;
+			height: 85%;
 
-        @include flex-center;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
 
-        //border: 1px solid white;
+			gap: 20px;
 
-        position: relative;
+			.info {
+				width: fit-content;
+				height: 100%;
 
-        .err {
-          border: red;
-          background: red;
-        }
+				flex-direction: column;
+				justify-content: space-around;
+				gap: 10px;
 
-        .rotate {
-          @include flex-center;
+				.timer {
+					width: 100%;
+					height: fit-content;
+				}
 
-          width: fit-content;
-          height: fit-content;
+				.number {
+					width: 100%;
+					height: fit-content;
+				}
+			}
 
-          font-size: 3rem;
-          padding: 5px;
+			.content {
+				@include mixins.flex-center;
+				width: fit-content;
+				height: 100%;
 
-          border: 1px solid white;
-          border-radius: 10px;
-
-          position: absolute;
-          bottom: 50%;
-          transform: translateY(50%);
-          right: 10px;
-
-          &:hover {
-            background: $color-btn-hover;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-  }
-}
-
-.root.vertical {
-  .container {
-    min-width: 80%;
-    height: 85%;
-
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-    gap: 20px;
-
-    //background: red;
-
-    .info {
-      width: fit-content;
-      height: 100%;
-
-      flex-direction: column;
-      justify-content: space-around;
-      gap: 10px;
-
-      .timer {
-        width: 100%;
-        height: fit-content;
-      }
-
-      .number {
-        width: 100%;
-        height: fit-content;
-      }
-    }
-
-    .content {
-      @include flex-center;
-      width: fit-content;
-      height: 100%;
-
-      .top {
-        @include flex-center;
-        width: fit-content;
-        height: fit-content;
-      }
-
-      .bottom {
-        .rotate {
-          right: -50%;
-        }
-      }
-    }
-  }
+				.top {
+					@include mixins.flex-center;
+					width: fit-content;
+					height: fit-content;
+				}
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 800px) {
-  .root .container .info {
-    .timer {
-      font-size: 3rem;
-    }
+	.root .scroll .container .info {
+		.timer {
+			font-size: 3rem;
+		}
 
-    .number {
-      font-size: 3rem;
-    }
-  }
+		.number {
+			font-size: 3rem;
+		}
+	}
 
-  .root.vertical .container {
-    margin-bottom: 80px;
-  }
-
-  .rotate {
-    visibility: hidden;
-  }
+	.root.vertical .container {
+		margin-bottom: 80px;
+	}
 }
 
 @media only screen and (max-width: 550px) {
-  .root .container {
-    height: 100%;
-    width: 90%;
+	.root .scroll .container {
+		.info {
+			flex-direction: column;
+			align-items: center;
 
-    @include flex-center;
+			.timer {
+				width: 80%;
+				font-size: 3rem;
+			}
 
-    margin-bottom: 75px;
-    margin-top: 20px;
-
-    .info {
-      flex-direction: column;
-      align-items: center;
-
-      .timer {
-        width: 80%;
-        font-size: 3rem;
-      }
-
-      .number {
-        width: 80%;
-        font-size: 3rem;
-      }
-    }
-  }
+			.number {
+				font-size: 3rem;
+			}
+		}
+	}
 }

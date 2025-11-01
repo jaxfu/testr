@@ -1,0 +1,60 @@
+@use "../../styles/mixins";
+@use "../../styles/vars";
+
+.root {
+	@include mixins.full-size-percent;
+	overflow: auto;
+
+	.scroll {
+		min-height: 100%;
+		width: 100%;
+		@include mixins.flex-center-col;
+
+		overflow: auto;
+		text-wrap: wrap;
+
+		.content {
+			width: 60%;
+			display: flex;
+			flex-direction: column;
+
+			background: white;
+			border-radius: vars.$border-radius;
+
+			color: black;
+
+			div {
+				border-bottom: 2px solid black;
+
+				h1 {
+					width: 100%;
+					text-align: center;
+
+					font-size: 1.5rem;
+					font-weight: bold;
+				}
+
+				h2 {
+					width: 100%;
+					text-align: center;
+
+					font-size: 1.2rem;
+					font-weight: bold;
+				}
+
+				.inputs {
+					@include mixins.flex-center-col;
+
+					div {
+						@include mixins.flex-center-row;
+						gap: 10px;
+					}
+				}
+
+				&:last-of-type {
+					border: none;
+				}
+			}
+		}
+	}
+}

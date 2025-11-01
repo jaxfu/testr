@@ -5,3 +5,5 @@ config.env
 data/
 deployment/
 init_db.sh
+.env
+*.env

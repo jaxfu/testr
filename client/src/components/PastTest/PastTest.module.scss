@@ -1,30 +1,30 @@
-@import "../../styles/mixins";
-@import "../../styles/vars";
+@use "../../styles/mixins";
+@use "../../styles/vars";
 
 .root {
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 5px;
+	border: 1px solid white;
+	border-radius: 10px;
+	padding: 5px;
 
-  font-size: larger;
+	font-size: larger;
 
-  h2 {
-    font-size: 1.5rem;
-    text-align: center;
-  }
+	h2 {
+		font-size: 1.5rem;
+		text-align: center;
+	}
 
-  .stats {
-    @include flex-center;
-    gap: 5px;
-    flex-direction: row;
-    flex-wrap: wrap;
+	.stats {
+		@include mixins.flex-center;
+		gap: 5px;
+		flex-direction: row;
+		flex-wrap: wrap;
 
-    div {
-      border: 1px solid white;
-      border-radius: 10px;
-      padding: 3px;
+		div {
+			border: 1px solid white;
+			border-radius: 10px;
+			padding: 3px;
 
-      background: black;
-    }
-  }
+			background: black;
+		}
+	}
 }

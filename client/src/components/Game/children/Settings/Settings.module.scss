@@ -1,199 +1,235 @@
-@import "../../../../styles/mixins";
-@import "../../../../styles/vars";
+@use "../../../../styles/mixins";
+@use "../../../../styles/vars";
+
+$border: 1px solid black;
+$br: 10px;
+$form-bg: #ededed;
+$hover: rgba(
+	$color: #3b3737,
+	$alpha: 0.1,
+);
+$btn-color: green;
 
 .root {
-  min-width: 287px;
-  @include full-size-percent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	@include mixins.full-size-percent;
 
-  overflow-y: auto;
+	overflow: auto;
 
-  //border: 1px solid red;
+	.scroll {
+		min-width: 100%;
+		min-height: 100%;
+		@include mixins.flex-center;
 
-  position: relative;
+		padding-top: 20px;
+		padding-bottom: 20px;
 
-  .scroll {
-    width: 100%;
-    height: fit-content;
-    @include flex-center;
+		form {
+			min-width: fit-content;
+			width: 50%;
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			align-items: center;
 
-    //border: 1px solid blue;
+			border-radius: $br;
 
-    padding-top: 20px;
-    padding-bottom: 100px;
+			user-select: none;
 
-    form {
-      width: 80%;
-      border: 1px solid white;
-      border-radius: 10px;
+			//background: vars.$form-bg;
+			//color: black;
 
-      display: flex;
-      flex-direction: column;
+			input {
+				height: 5rem;
 
-      // position: absolute;
-      // top: 50px;
+				border: 1px solid white;
+				border-radius: $br;
+				background: rgba($color: #b7b6b6, $alpha: 1);
 
-      h2 {
-        font-size: 2.5rem;
-        text-align: center;
-      }
+				color: black;
+				text-align: center;
 
-      div {
-        width: 100%;
+				font-size: 3rem;
+				font-weight: bold;
 
-        .errInput {
-          color: red;
-        }
-      }
+				&.errInput {
+					border: 2px solid red;
+					background: rgba($color: #f00, $alpha: 0.5);
+				}
+			}
 
-      input[type="checkbox"] {
-        margin-bottom: 5px;
-        width: 3rem;
-        height: 3rem;
-      }
+			.range {
+				display: grid;
+				grid-template-columns: 1fr 4rem 1fr;
 
-      input[type="number"] {
-        width: 6rem;
-        height: 3rem;
+				padding: 10px;
 
-        text-align: center;
-        font-size: 2rem;
-        font-weight: bold;
-      }
+				div {
+					@include mixins.full-size-percent;
+					@include mixins.flex-center-col;
 
-      .err,
-      .ops_error {
-        font-size: 1.5rem;
-      }
+					input {
+						width: 10rem;
+					}
+				}
 
-      .range {
-        //border: 1px solid red;
-        border-bottom: 1px solid white;
-        display: grid;
-        grid-template-columns: repeat(2, 50%);
+				.div {
+					font-size: 4rem;
+					text-align: center;
+				}
+			}
 
-        .min {
-          border-right: 1px solid white;
-        }
+			.ops {
+				width: 100%;
 
-        div {
-          @include flex-center;
-          //border: 1px solid white;
+				display: grid;
+				grid-template-columns: repeat(4, 25%);
 
-          padding: 5px;
+				border: 1px solid vars.$form-bg;
 
-          .err {
-            width: 100%;
-            top: 5rem;
-            color: red;
-            text-align: center;
-            //border: 1px solid black;
-          }
-        }
-      }
+				div {
+					width: 100%;
+					height: 100%;
+					@include mixins.flex-center-col;
 
-      .ops {
-        @include full-size-percent;
-        display: grid;
-        grid-template-columns: repeat(4, 25%);
-        border-bottom: 1px solid white;
+					border-right: 1px solid vars.$form-bg;
 
-        div {
-          @include flex-center;
-        }
-        .add {
-          border-right: 1px solid white;
-        }
+					font-size: 4rem;
+					font-weight: 900;
 
-        .sub {
-          border-right: 1px solid white;
-        }
+					color: white;
 
-        .mult {
-          border-right: 1px solid white;
-        }
-      }
+					backdrop-filter: blur(2rem);
+					-webkit-backdrop-filter: blur(2rem);
 
-      .ops_error {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: fit-content;
-        color: red;
-        text-align: center;
-        border-bottom: 1px solid white;
-      }
+					&:hover {
+						cursor: pointer;
+					}
 
-      .limits {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, 50%);
+					&:last-of-type {
+						border: none;
+					}
+				}
 
-        .time {
-          border-right: 1px solid white;
-        }
+				.checked {
+					background: rgba($color: rgb(20, 148, 54), $alpha: 1);
 
-        div {
-          @include flex-center;
-          padding: 5px;
+					color: rgba($color: #fff, $alpha: 1);
+				}
 
-          .err {
-            width: 100%;
-            top: 5rem;
-            color: red;
-            text-align: center;
-            //border: 1px solid black;
-          }
-        }
-      }
+				.unchecked {
+					background: vars.$main-bg;
 
-      button {
-        background: green;
-        border: none;
-        border-top: 1px solid white;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        height: 3rem;
+					color: rgba($color: #fff, $alpha: 0.5);
+				}
+			}
 
-        padding: 5px;
+			.limits {
+				width: 100%;
 
-        font-size: 2rem;
-        font-weight: bold;
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				margin-top: 10px;
 
-        &:hover {
-          background: rgb(12, 172, 12);
-        }
-      }
-    }
+				border: 1px solid vars.$form-bg;
 
-    .spacer {
-      width: 100%;
-      height: 100px;
+				div {
+					width: 100%;
+					@include mixins.flex-center-col;
 
-      background-color: red;
-    }
-  }
+					font-size: 4rem;
+
+					padding: 10px;
+
+					&:first-of-type {
+						border-right: 1px solid vars.$form-bg;
+					}
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+
+				.checked {
+					background: rgba($color: rgb(7, 7, 246), $alpha: 1);
+
+					color: rgba($color: #fff, $alpha: 1);
+				}
+
+				.unchecked {
+					background: vars.$main-bg;
+
+					color: rgba($color: #fff, $alpha: 0.5);
+				}
+			}
+
+			.limit_count {
+				width: 100%;
+				@include mixins.flex-center-row;
+
+				margin-top: 10px;
+
+				div {
+					@include mixins.flex-center-col;
+
+					input {
+						width: 10rem;
+					}
+
+					span {
+						font-size: 2rem;
+					}
+				}
+			}
+		}
+
+		.button {
+			aspect-ratio: 1/1;
+			width: 20%;
+
+			@include mixins.flex-center-col;
+
+			border-radius: $br;
+
+			font-size: 3rem;
+
+			border: none;
+
+			background: $btn-color;
+
+			.img {
+				@include mixins.full-size-percent;
+				padding: 10px;
+
+				transform: translateX(4px);
+			}
+		}
+	}
 }
 
-.hidden {
-  visibility: none;
+@media only screen and (min-width: 600px) {
+	.root .scroll form {
+		.ops {
+			div:hover {
+				background: grey;
+			}
+		}
+
+		.limits {
+			div:hover {
+				background: grey;
+			}
+		}
+	}
 }
 
-@media only screen and (min-width: 700px) {
-  .root .scroll form {
-    width: 50%;
-  }
-}
+@media only screen and (max-width: 600px) {
+	.root .scroll form {
+		width: 90%;
 
-@media only screen and (max-width: 525px) {
-  .root .scroll form .limits {
-    div {
-      h2 {
-        font-size: 1.5rem;
-      }
-    }
-  }
+		.range {
+			div input {
+				width: 8rem;
+			}
+		}
+	}
 }

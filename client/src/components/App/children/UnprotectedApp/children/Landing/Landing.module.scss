@@ -1,0 +1,75 @@
+@use "../../../../../../styles/vars";
+@use "../../../../../../styles/mixins";
+
+.root {
+	@include mixins.full-size-percent;
+
+	// display: grid;
+	// grid-template-columns: repeat(2, 1fr);
+
+	overflow: auto;
+
+	.scroll {
+		min-width: 100%;
+		min-height: 100%;
+
+		@include mixins.flex-center-col;
+		gap: 50px;
+
+		padding: 20px;
+
+		.words {
+			width: 100%;
+			@include mixins.flex-center-col;
+
+			//border-bottom: 1px solid white;
+
+			div {
+				width: 60%;
+
+				font-size: 4rem;
+				font-weight: 900;
+				text-align: center;
+			}
+		}
+
+		.get_started {
+			width: fit-content;
+
+			div {
+				text-align: center;
+
+				font-size: 2rem;
+				background: rgb(15, 117, 67);
+				border-radius: 15px;
+				padding-left: 10px;
+				padding-right: 10px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+
+				&:hover {
+					cursor: pointer;
+
+					background: vars.$logo-accent;
+				}
+			}
+		}
+	}
+}
+
+.accent {
+	color: vars.$logo-accent;
+}
+
+@media only screen and (max-width: 500px) {
+	.root .scroll {
+		.words div {
+			font-size: 3rem;
+			width: 95%;
+		}
+
+		.get_started div {
+			max-width: 70%;
+		}
+	}
+}

@@ -1,0 +1,58 @@
+@use "../../../../styles/mixins";
+@use "../../../../styles/vars";
+
+.root {
+	@include mixins.full-size-percent;
+
+	background: vars.$main-bg;
+
+	overflow: auto;
+
+	.scroll {
+		width: 100%;
+		min-height: 100%;
+
+		.row {
+			width: 100%;
+			@include mixins.flex-center-row;
+
+			display: grid;
+			grid-template-columns: 75% 25%;
+
+			background: vars.$grid-bg;
+
+			border-bottom: vars.$grid-border;
+			border-left: vars.$grid-border;
+			border-right: vars.$grid-border;
+
+			div {
+				width: 100%;
+				@include mixins.flex-center-row;
+
+				border-right: vars.$grid-border;
+
+				&:last-of-type {
+					border: none;
+				}
+			}
+
+			&.headers {
+				background: vars.$grid-header-bg;
+
+				border-top: vars.$grid-border;
+			}
+		}
+
+		.add {
+			@include mixins.flex-center-row;
+		}
+	}
+}
+
+@media only screen and (min-width: vars.$mobile-width) {
+	.root .scroll .row:hover {
+		cursor: pointer;
+
+		background: lightgrey;
+	}
+}

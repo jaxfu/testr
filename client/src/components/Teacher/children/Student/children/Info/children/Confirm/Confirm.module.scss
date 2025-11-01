@@ -1,0 +1,64 @@
+@use "../../../../../../../../styles/vars";
+@use "../../../../../../../../styles/mixins";
+
+.root {
+	width: 100%;
+	height: calc(100% - vars.$topbar-height);
+
+	@include mixins.flex-center;
+
+	position: absolute;
+	bottom: 0;
+
+	backdrop-filter: blur(0.5rem);
+
+	z-index: 25;
+
+	.content {
+		width: 50%;
+		@include mixins.flex-center-col;
+
+		border-radius: vars.$border-radius;
+		padding: 10px;
+		background: white;
+		color: black;
+
+		font-size: 1.5rem;
+
+		span {
+			text-align: center;
+			color: blue;
+
+			font-size: 2rem;
+		}
+
+		.buttons {
+			@include mixins.flex-center-row;
+			gap: 10px;
+
+			span {
+				cursor: pointer;
+			}
+
+			#check {
+				color: green;
+			}
+
+			#cancel {
+				color: red;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: vars.$mobile-width) {
+	.root .content .buttons {
+		#check:hover {
+			color: grey;
+		}
+
+		#cancel:hover {
+			color: grey;
+		}
+	}
+}
